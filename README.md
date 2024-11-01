@@ -1,13 +1,13 @@
-## A Quiz Command Line Interface usig Dart
+# A Quiz Command Line Interface usig Dart
 
-# To clone the project
+## To clone the project
 
-# Fetches all the dependencies
+## Fetches all the dependencies
 ```
 dart pub get
 ```
 
-# After confiuring .env, run
+## After confiuring .env, run
 ```
 dart run build_runner build
 ```

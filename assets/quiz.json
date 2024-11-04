@@ -1,0 +1,86 @@
+{
+  "title": "Fundemental of Mobile Development",
+  "description": "Test your understanding about basic Flutter!",
+  "questions": [
+    {
+      "questionText": "What is the main building blocks of Flutter UIs?",
+      "answers": {
+        "a": "Widgets",
+        "b": "Components",
+        "c": "Blocks",
+        "d": "Functions"
+      },
+      "isMultiChoice": false,
+      "correctAnswer": "a"
+    },
+    {
+      "questionText": "How are Flutter UIs built?",
+      "answers": {
+        "a": "By defining widgets in config files",
+        "b": "By combining widgets in a visual editor",
+        "c": "By combining widgets in code",
+        "d": "By using XCode for iOS and Android Studio for Android"
+      },
+      "isMultiChoice": false,
+      "correctAnswer": "c"
+    },
+    {
+      "questionText": "How can declear variable for immuteable?",
+      "answers": {
+        "a": "By keyword var",
+        "b": "By keyword const",
+        "c": "By keyword final",
+        "d": "By keyword String"
+      },
+      "isMultiChoice": true,
+      "correctAnswer": [
+        "b",
+        "c"
+      ]
+    },
+    {
+      "questionText": "What's the purpose of a StatefulWidget?",
+      "answers": {
+        "a": "Render UI that does not depend on data",
+        "b": "Update data as UI changes",
+        "c": "Ignore data changes",
+        "d": "Update UI as data changes"
+      },
+      "isMultiChoice": false,
+      "correctAnswer": "d"
+    },
+    {
+      "questionText": "Which widget should you try to use more often: StatelessWidget or StatefulWidget?",
+      "answers": {
+        "a": "StatelessWidget",
+        "b": "StatefulWidget",
+        "c": "Both are equally good",
+        "d": "None of the above"
+      },
+      "isMultiChoice": false,
+      "correctAnswer": "a"
+    },
+    {
+      "questionText": "What happens if you change data in a StatelessWidget?",
+      "answers": {
+        "a": "The closest StatefulWidget is updated",
+        "b": "The UI is updated",
+        "c": "The UI is not updated",
+        "d": "Any nested StatefulWidgets are updated"
+      },
+      "isMultiChoice": false,
+      "correctAnswer": "c"
+    },
+    {
+      "questionText": "How should you update data inside of StatefulWidgets?",
+      "answers": {
+        "a": "By calling updateData()",
+        "b": "By calling updateUI()",
+        "c": "By calling updateState()",
+        "d": "By calling setState()"
+      },
+      "isMultiChoice": false,
+      "correctAnswer": "d"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ void main() async {
 
   QuizManager quiz = QuizManager(quizzes);
   quiz.displayAvailableQuiz();
+  quiz.selectQuiz();
 
   exit(0);
 }

@@ -71,6 +71,6 @@ class Question {
 
   @override
   String toString() {
-    return 'Questions: $questionText\nAnswers: $answers\nisMultiChoice: $isMultiChoice\ncorrectAnswer: $correctAnswer';
+    return 'Questions: $questionText\nAnswers: $answers\nisMultiChoice: $isMultiChoice\ncorrectAnswer: $correctAnswer\n\n';
   }
 }

@@ -19,7 +19,9 @@ class QuizManager {
       print("${i + 1}. ${quizzes[i].title}");
     }
     print("");
+  }
 
+  Future<void> selectQuiz() async {
     String input;
     do {
       // Prompt user to select a quiz
@@ -45,6 +47,7 @@ class QuizManager {
   }
 
   void startQuiz(Quiz quiz) {
+    print("");
     print('Starting Quiz: ${quiz.title}');
     print('${quiz.description}\n');
 

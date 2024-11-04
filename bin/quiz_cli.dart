@@ -1,16 +1,14 @@
-import 'package:firedart/firedart.dart';
-import 'package:quiz_cli/env/env.dart';
+import 'dart:io';
+
+import 'package:quiz_cli/db.dart';
+import 'package:quiz_cli/quiz_manager.dart';
 
 void main() async {
-  // Some test code for Firebase's connection
-  const projectId = Env.projectId;
+  final db = FirestoreDB.initialize();
+  final quizzes = await db.getAllQuizzes();
 
-  Firestore.initialize(projectId);
-  final firestore = Firestore.instance;
+  QuizManager quiz = QuizManager(quizzes);
+  quiz.displayAvailableQuiz();
 
-  var documents = await firestore.collection('Quiz').get();
-  for (var doc in documents) {
-    print('Document ID: ${doc.id}, Data: ${doc.map}');
-  }
-  /*******************************************************/
+  exit(0);
 }

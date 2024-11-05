@@ -11,7 +11,7 @@ Change to your real enviroment (database api key, app id...)
 dart pub get
 ```
 
-## After confiuring .env, run
+## Build environment
 ```
 dart run build_runner build
 ```

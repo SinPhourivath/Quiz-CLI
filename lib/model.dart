@@ -77,13 +77,11 @@ class Question {
 
 class Student {
   final String firstName;
-  final String? lastName;
-  final int score;
+  final String lastName;
 
   Student({
     required this.firstName,
-    this.lastName,
-    required this.score,
+    required this.lastName,
   });
 
   // Create an instance from JSON
@@ -91,7 +89,6 @@ class Student {
     return Student(
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
-      score: json['score'] as int,
     );
   }
 
@@ -100,12 +97,11 @@ class Student {
     return {
       'firstName': firstName,
       'lastName': lastName,
-      'score': score,
     };
   }
 
   @override
   String toString() {
-    return 'Student: $firstName $lastName, Score: $score';
+    return 'Student: $firstName $lastName';
   }
 }

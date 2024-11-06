@@ -4,6 +4,7 @@ import 'package:quiz_cli/db.dart';
 import 'package:quiz_cli/quiz_manager.dart';
 
 void main() async {
+
   final db = FirestoreDB.initialize();
   final quizzes = await db.getAllQuizzes();
 

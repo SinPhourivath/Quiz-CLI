@@ -1,5 +1,4 @@
-import 'dart:io';
-import 'package:collection/collection.dart';
+import 'package:quiz_cli/logic.dart';
 import 'package:quiz_cli/model.dart';
 
 class QuizManager {
@@ -21,61 +20,62 @@ class QuizManager {
   }
 
   Future<void> selectQuiz() async {
-    String input;
-    do {
-      // Prompt user to select a quiz
-      stdout.write("Select a quiz by entering its number: ");
-      input = stdin.readLineSync()!.trim();
+    Logic logic = Logic();
 
-      if (input.isEmpty) {
-        print("Input cannot be empty. Please try again.");
-      } else if (int.tryParse(input) == null) {
-        print("Invalid input. Please enter a number.");
-        input = "";
+    do {
+      String input = logic.promptForValidNumber("Choose a quiz to attempt: ");
+      int selectedIndex = int.parse(input) - 1;
+
+      if (selectedIndex >= 0 && selectedIndex < quizzes.length) {
+        Quiz selectedQuiz = quizzes[selectedIndex];
+        takeQuiz(selectedQuiz);
       } else {
-        int selectedIndex = int.parse(input) - 1;
-        if (selectedIndex >= 0 && selectedIndex < quizzes.length) {
-          Quiz selectedQuiz = quizzes[selectedIndex];
-          takeQuiz(selectedQuiz);
-        } else {
-          print("Invalid selection. Please try again.");
-          input = "";
-        }
+        print("Invalid selection. Please try again.");
       }
-    } while (input.isEmpty);
+    } while (true);
   }
 
   void takeQuiz(Quiz quiz) {
-    stdout.write("Enter your first name: ");
-    String firstName = stdin.readLineSync()!.trim();
-    stdout.write("Enter your last name: ");
-    String lastName = stdin.readLineSync()!.trim();
+    Logic logic = Logic();
+
+    String firstName = logic.promptForValidString("\nEnter your first name: ");
+    String lastName = logic.promptForValidString("Enter your last name: ");
 
     print("\nStarting Quiz: ${quiz.title}");
     print('${quiz.description}\n');
 
     int score = 0;
 
-    // Go through each question and calculate the score
     for (var question in quiz.questions) {
       print(question.questionText);
       question.answers.forEach((key, value) {
         print('$key: $value');
       });
 
-      stdout.write("Your Answer: ");
-      String? userAnswer = stdin.readLineSync(); // Read user input
+      String? userAnswer;
+
+      // Check if answer are listed alphabetically or numerically
+      String answerType = question.answers.keys.first;
+      if (int.tryParse(answerType) == null) {
+        question.isMultiChoice
+            ? userAnswer = logic.promptForValidStringList("Your answer: ")
+            : userAnswer = logic.promptForValidString("Your answer: ");
+      } else {
+        question.isMultiChoice
+            ? userAnswer = logic.promptForValidNumberList("Your answer: ")
+            : userAnswer = logic.promptForValidNumber("Your answer: ");
+      }
+
       bool isCorrect = checkAnswer(question, userAnswer);
-      
+
       if (isCorrect) {
-        print('Correct!');
+        print('Correct!\n');
         score++;
       } else {
-        print('Incorrect. The correct answer is: ${question.correctAnswer}');
+        print('Incorrect. The correct answer is: ${question.correctAnswer}\n');
       }
-      print("");
     }
-    // Display the result of the student
+
     print("Quiz Completed!");
     print("Student: $firstName $lastName");
     print("Score: $score / ${quiz.questions.length}");
@@ -85,9 +85,12 @@ class QuizManager {
     if (question.isMultiChoice) {
       List<String> userAnswers =
           userAnswer?.split(',').map((answer) => answer.trim()).toList() ?? [];
+
       List<String> correctAnswers =
           question.correctAnswer is List<String> ? question.correctAnswer : [];
-      return ListEquality().equals(userAnswers, correctAnswers);
+
+      return Set.from(userAnswers).containsAll(Set.from(correctAnswers)) &&
+          Set.from(correctAnswers).containsAll(Set.from(userAnswers));
     } else {
       return userAnswer == question.correctAnswer;
     }

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:collection/collection.dart';
 import 'package:quiz_cli/model.dart';
 
@@ -37,7 +36,7 @@ class QuizManager {
         int selectedIndex = int.parse(input) - 1;
         if (selectedIndex >= 0 && selectedIndex < quizzes.length) {
           Quiz selectedQuiz = quizzes[selectedIndex];
-          startQuiz(selectedQuiz);
+          takeQuiz(selectedQuiz);
         } else {
           print("Invalid selection. Please try again.");
           input = "";
@@ -46,11 +45,18 @@ class QuizManager {
     } while (input.isEmpty);
   }
 
-  void startQuiz(Quiz quiz) {
-    print("");
-    print('Starting Quiz: ${quiz.title}');
+  void takeQuiz(Quiz quiz) {
+    stdout.write("Enter your first name: ");
+    String firstName = stdin.readLineSync()!.trim();
+    stdout.write("Enter your last name: ");
+    String lastName = stdin.readLineSync()!.trim();
+
+    print("\nStarting Quiz: ${quiz.title}");
     print('${quiz.description}\n');
 
+    int score = 0;
+
+    // Go through each question and calculate the score
     for (var question in quiz.questions) {
       print(question.questionText);
       question.answers.forEach((key, value) {
@@ -60,11 +66,19 @@ class QuizManager {
       stdout.write("Your Answer: ");
       String? userAnswer = stdin.readLineSync(); // Read user input
       bool isCorrect = checkAnswer(question, userAnswer);
-      print(isCorrect
-          ? 'Correct!'
-          : 'Incorrect. The correct answer is: ${question.correctAnswer}\n');
+      
+      if (isCorrect) {
+        print('Correct!');
+        score++;
+      } else {
+        print('Incorrect. The correct answer is: ${question.correctAnswer}');
+      }
       print("");
     }
+    // Display the result of the student
+    print("Quiz Completed!");
+    print("Student: $firstName $lastName");
+    print("Score: $score / ${quiz.questions.length}");
   }
 
   bool checkAnswer(Question question, String? userAnswer) {

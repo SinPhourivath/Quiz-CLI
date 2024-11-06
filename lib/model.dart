@@ -74,3 +74,38 @@ class Question {
     return 'Questions: $questionText\nAnswers: $answers\nisMultiChoice: $isMultiChoice\ncorrectAnswer: $correctAnswer\n\n';
   }
 }
+
+class Student {
+  final String firstName;
+  final String? lastName;
+  final int score;
+
+  Student({
+    required this.firstName,
+    this.lastName,
+    required this.score,
+  });
+
+  // Create an instance from JSON
+  factory Student.fromJson(Map<String, dynamic> json) {
+    return Student(
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'] as String,
+      score: json['score'] as int,
+    );
+  }
+
+  // Convert instance back to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+      'score': score,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Student: $firstName $lastName, Score: $score';
+  }
+}

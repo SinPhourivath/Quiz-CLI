@@ -12,7 +12,7 @@ void main() async {
     print("1. Display all quizzes");
     print("2. Add a quiz");
     print("3. Delete a quiz");
-    print("4. Quit");
+    print("4. Quiz");
     print("");
 
     stdout.write("Enter your choice: ");
@@ -35,6 +35,7 @@ void main() async {
         String index = stdin.readLineSync()!.trim();
 
         await db.deleteQuiz(int.parse(index));
+
       case '4':
         exit(0);
       default:

@@ -65,4 +65,24 @@ class FirestoreDB {
       print("Failed to delete quiz at index $index: $e");
     }
   }
+
+  // New method to save quiz result
+  Future<void> saveQuizResult(String firstName, String lastName, int score) async {
+    final document = firestore.collection('quizResults');
+
+    try {
+      await document.add({
+        'firstName': firstName,
+        'lastName': lastName,
+        'score': score,
+        'timestamp': DateTime.now(),// toIso8601String(),
+      });
+
+      //await document.add(.toJson()); must implement save to database
+
+      print("Quiz result for $firstName $lastName has been saved to Firestore.");
+    } catch (e) {
+      print("Failed to save quiz result: $e");
+    }
+  }
 }

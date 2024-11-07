@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:quiz_cli/db.dart';
+import 'package:quiz_cli/model.dart';
 import 'package:quiz_cli/quiz_manager.dart';
 
 void main() async {
@@ -10,7 +11,10 @@ void main() async {
 
   QuizManager quiz = QuizManager(quizzes);
   quiz.displayAvailableQuiz();
-  quiz.selectQuiz();
+
+  QuizResult quizResult = quiz.takeQuiz();
+  await db.saveQuizResult(quizResult);
 
   exit(0);
 }
+

@@ -107,14 +107,14 @@ class Student {
 }
 
 class QuizResult {
-  final String quizId;
-  final String studentId; // ID to identify the student
+  final String quizName;
+  final String studentName; // ID to identify the student
   final int score;
   final List<QuestionResult> questionResults;
 
   QuizResult({
-    required this.quizId,
-    required this.studentId,
+    required this.quizName,
+    required this.studentName,
     required this.score,
     required this.questionResults,
   });
@@ -122,8 +122,8 @@ class QuizResult {
   // Create an instance from JSON
   factory QuizResult.fromJson(Map<String, dynamic> json) {
     return QuizResult(
-      quizId: json['quizId'] as String,
-      studentId: json['studentId'] as String,
+      quizName: json['quizId'] as String,
+      studentName: json['studentId'] as String,
       score: json['score'] as int,
       questionResults: (json['questionResults'] as List)
           .map((question) => QuestionResult.fromJson(question))
@@ -134,8 +134,8 @@ class QuizResult {
   // Convert instance back to JSON
   Map<String, dynamic> toJson() {
     return {
-      'quizId': quizId,
-      'studentId': studentId,
+      'quizName': quizName,
+      'studentName': studentName,
       'score': score,
       'questionResults': questionResults.map((q) => q.toJson()).toList(),
     };
@@ -143,7 +143,7 @@ class QuizResult {
 
   @override
   String toString() {
-    return 'QuizResult for Student $studentId, Quiz $quizId, Score: $score\nQuestions: $questionResults';
+    return 'QuizResult for Student $studentName, Quiz $quizName, Score: $score\nQuestions: $questionResults';
   }
 }
 

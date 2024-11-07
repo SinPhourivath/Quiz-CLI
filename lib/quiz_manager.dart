@@ -6,7 +6,7 @@ class QuizManager {
 
   QuizManager(this.quizzes);
 
-  Future<void> displayAvailableQuiz() async {
+  void displayAvailableQuiz() {
     if (quizzes.isEmpty) {
       print("No quizzes available.");
       return;
@@ -19,7 +19,7 @@ class QuizManager {
     print("");
   }
 
-  Future<void> selectQuiz() async {
+  Quiz selectQuiz() {
     Logic logic = Logic();
 
     do {
@@ -28,14 +28,16 @@ class QuizManager {
 
       if (selectedIndex >= 0 && selectedIndex < quizzes.length) {
         Quiz selectedQuiz = quizzes[selectedIndex];
-        takeQuiz(selectedQuiz);
+        return selectedQuiz;
       } else {
         print("Invalid selection. Please try again.");
       }
     } while (true);
   }
 
-  void takeQuiz(Quiz quiz) {
+  QuizResult takeQuiz() {
+    Quiz quiz = selectQuiz();
+
     Logic logic = Logic();
 
     String firstName = logic.promptForValidString("\nEnter your first name: ");
@@ -45,6 +47,7 @@ class QuizManager {
     print('${quiz.description}\n');
 
     int score = 0;
+    List<QuestionResult> questionResults = [];
 
     for (var question in quiz.questions) {
       print(question.questionText);
@@ -74,11 +77,22 @@ class QuizManager {
       } else {
         print('Incorrect. The correct answer is: ${question.correctAnswer}\n');
       }
+
+      questionResults.add(QuestionResult(
+          questionText: question.questionText,
+          selectedAnswer: userAnswer!,
+          isCorrect: isCorrect));
     }
 
     print("Quiz Completed!");
     print("Student: $firstName $lastName");
     print("Score: $score / ${quiz.questions.length}");
+
+    return QuizResult(
+        quizName: quiz.title,
+        studentName: "$firstName $lastName",
+        score: score,
+        questionResults: questionResults);
   }
 
   bool checkAnswer(Question question, String? userAnswer) {

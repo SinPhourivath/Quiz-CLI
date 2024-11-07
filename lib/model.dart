@@ -105,3 +105,79 @@ class Student {
     return 'Student: $firstName $lastName';
   }
 }
+
+class QuizResult {
+  final String quizId;
+  final String studentId; // ID to identify the student
+  final int score;
+  final List<QuestionResult> questionResults;
+
+  QuizResult({
+    required this.quizId,
+    required this.studentId,
+    required this.score,
+    required this.questionResults,
+  });
+
+  // Create an instance from JSON
+  factory QuizResult.fromJson(Map<String, dynamic> json) {
+    return QuizResult(
+      quizId: json['quizId'] as String,
+      studentId: json['studentId'] as String,
+      score: json['score'] as int,
+      questionResults: (json['questionResults'] as List)
+          .map((question) => QuestionResult.fromJson(question))
+          .toList(),
+    );
+  }
+
+  // Convert instance back to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'quizId': quizId,
+      'studentId': studentId,
+      'score': score,
+      'questionResults': questionResults.map((q) => q.toJson()).toList(),
+    };
+  }
+
+  @override
+  String toString() {
+    return 'QuizResult for Student $studentId, Quiz $quizId, Score: $score\nQuestions: $questionResults';
+  }
+}
+
+class QuestionResult {
+  final String questionText;
+  final String selectedAnswer;
+  final bool isCorrect;
+
+  QuestionResult({
+    required this.questionText,
+    required this.selectedAnswer,
+    required this.isCorrect,
+  });
+
+  // Create an instance from JSON
+  factory QuestionResult.fromJson(Map<String, dynamic> json) {
+    return QuestionResult(
+      questionText: json['questionText'] as String,
+      selectedAnswer: json['selectedAnswer'] as String,
+      isCorrect: json['isCorrect'] as bool,
+    );
+  }
+
+  // Convert instance back to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'questionText': questionText,
+      'selectedAnswer': selectedAnswer,
+      'isCorrect': isCorrect,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Question: $questionText\nSelected Answer: $selectedAnswer\nCorrect: $isCorrect\n';
+  }
+}

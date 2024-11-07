@@ -1,7 +1,7 @@
 import 'dart:io';
 
 class Logic {
-  String promptForValidString(String prompt) {
+  String promptForChar(String prompt) {
     String? str;
     while (true) {
       stdout.write(prompt);
@@ -15,7 +15,7 @@ class Logic {
     }
   }
 
-  String promptForValidNumber(String prompt) {
+  String promptForNum(String prompt) {
     String? numberInput;
     while (true) {
       stdout.write(prompt);
@@ -29,7 +29,7 @@ class Logic {
     }
   }
 
-  String? promptForValidStringList(String prompt) {
+  String? promptForCharList(String prompt) {
     List<String>? inputList;
     String? input;
     bool flag;
@@ -58,7 +58,7 @@ class Logic {
     return input;
   }
 
-  String? promptForValidNumberList(String prompt) {
+  String? promptForNumList(String prompt) {
     List<String>? inputList;
     String? input;
     bool flag;

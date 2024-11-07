@@ -23,7 +23,7 @@ class QuizManager {
     Logic logic = Logic();
 
     do {
-      String input = logic.promptForValidNumber("Choose a quiz to attempt: ");
+      String input = logic.promptForNum("Choose a quiz to attempt: ");
       int selectedIndex = int.parse(input) - 1;
 
       if (selectedIndex >= 0 && selectedIndex < quizzes.length) {
@@ -40,8 +40,8 @@ class QuizManager {
 
     Logic logic = Logic();
 
-    String firstName = logic.promptForValidString("\nEnter your first name: ");
-    String lastName = logic.promptForValidString("Enter your last name: ");
+    String firstName = logic.promptForChar("\nEnter your first name: ");
+    String lastName = logic.promptForChar("Enter your last name: ");
 
     print("\nStarting Quiz: ${quiz.title}");
     print('${quiz.description}\n');
@@ -56,18 +56,39 @@ class QuizManager {
       });
 
       String? userAnswer;
-
-      // Check if answer are listed alphabetically or numerically
       String answerType = question.answers.keys.first;
-      if (int.tryParse(answerType) == null) {
-        question.isMultiChoice
-            ? userAnswer = logic.promptForValidStringList("Your answer: ")
-            : userAnswer = logic.promptForValidString("Your answer: ");
-      } else {
-        question.isMultiChoice
-            ? userAnswer = logic.promptForValidNumberList("Your answer: ")
-            : userAnswer = logic.promptForValidNumber("Your answer: ");
-      }
+
+      do {
+        if (int.tryParse(answerType) == null) {
+          if (question.isMultiChoice) {
+            userAnswer = logic.promptForCharList("Enter your answer: ");
+            if (!question.validateAnswer(userAnswer!)) {
+              print("Not available");
+              userAnswer = "";
+            }
+          } else {
+            userAnswer = logic.promptForChar("Enter your answer: ");
+            if (!question.validateAnswer(userAnswer)) {
+              print("Not available");
+              userAnswer = "";
+            }
+          }
+        } else {
+          if (question.isMultiChoice) {
+            userAnswer = logic.promptForNumList("Enter your answer:: ");
+            if (!question.validateAnswer(userAnswer!)) {
+              print("Not available");
+              userAnswer = "";
+            }
+          } else {
+            userAnswer = logic.promptForNum("Enter your answer: ");
+            if (!question.validateAnswer(userAnswer)) {
+              print("Not available");
+              userAnswer = "";
+            }
+          }
+        }
+      } while (userAnswer == "");
 
       bool isCorrect = checkAnswer(question, userAnswer);
 

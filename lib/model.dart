@@ -69,6 +69,19 @@ class Question {
     };
   }
 
+  bool validateAnswer(
+    String userAnswer,
+  ) {
+    final validOptions = answers.keys.toSet();
+    if (isMultiChoice) {
+      final userAnswers = userAnswer.split(',').map((e) => e.trim()).toSet();
+      return userAnswers.isNotEmpty &&
+          userAnswers.difference(validOptions).isEmpty;
+    } else {
+      return validOptions.contains(userAnswer);
+    }
+  }
+
   @override
   String toString() {
     return 'Questions: $questionText\nAnswers: $answers\nisMultiChoice: $isMultiChoice\ncorrectAnswer: $correctAnswer\n\n';

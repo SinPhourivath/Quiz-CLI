@@ -121,7 +121,7 @@ class Student {
 
 class QuizResult {
   final String quizName;
-  final String studentName; // ID to identify the student
+  final String studentName;
   final int score;
   final List<QuestionResult> questionResults;
 
@@ -135,8 +135,8 @@ class QuizResult {
   // Create an instance from JSON
   factory QuizResult.fromJson(Map<String, dynamic> json) {
     return QuizResult(
-      quizName: json['quizId'] as String,
-      studentName: json['studentId'] as String,
+      quizName: json['quizName'] as String,
+      studentName: json['studentName'] as String,
       score: json['score'] as int,
       questionResults: (json['questionResults'] as List)
           .map((question) => QuestionResult.fromJson(question))
@@ -156,7 +156,7 @@ class QuizResult {
 
   @override
   String toString() {
-    return 'QuizResult for Student $studentName, Quiz $quizName, Score: $score\nQuestions: $questionResults';
+    return 'QuizResult for Student $studentName\nQuiz Name: $quizName\n Score: $score\nQuestions: $questionResults';
   }
 }
 

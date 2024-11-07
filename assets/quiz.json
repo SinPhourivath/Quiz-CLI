@@ -1,86 +1,64 @@
 {
-  "title": "Fundemental of Mobile Development",
-  "description": "Test your understanding about basic Flutter!",
+  "title": "Programming Langauge",
+  "description": "Test your general understanding about programming langauge",
   "questions": [
     {
-      "questionText": "What is the main building blocks of Flutter UIs?",
+      "questionText": "Which one is a low level programming language?",
       "answers": {
-        "a": "Widgets",
-        "b": "Components",
-        "c": "Blocks",
-        "d": "Functions"
+        "a": "C",
+        "b": "Python",
+        "c": "Dart",
+        "d": "JavaScript"
       },
       "isMultiChoice": false,
       "correctAnswer": "a"
     },
     {
-      "questionText": "How are Flutter UIs built?",
+      "questionText": "Which one is a compiled language?",
       "answers": {
-        "a": "By defining widgets in config files",
-        "b": "By combining widgets in a visual editor",
-        "c": "By combining widgets in code",
-        "d": "By using XCode for iOS and Android Studio for Android"
-      },
-      "isMultiChoice": false,
-      "correctAnswer": "c"
-    },
-    {
-      "questionText": "How can declear variable for immuteable?",
-      "answers": {
-        "a": "By keyword var",
-        "b": "By keyword const",
-        "c": "By keyword final",
-        "d": "By keyword String"
-      },
-      "isMultiChoice": true,
-      "correctAnswer": [
-        "b",
-        "c"
-      ]
-    },
-    {
-      "questionText": "What's the purpose of a StatefulWidget?",
-      "answers": {
-        "a": "Render UI that does not depend on data",
-        "b": "Update data as UI changes",
-        "c": "Ignore data changes",
-        "d": "Update UI as data changes"
+        "a": "PHP",
+        "b": "Pthon",
+        "c": "Ruby",
+        "d": "Go"
       },
       "isMultiChoice": false,
       "correctAnswer": "d"
     },
     {
-      "questionText": "Which widget should you try to use more often: StatelessWidget or StatefulWidget?",
+      "questionText": "Which are JIT (Just in time) language?",
       "answers": {
-        "a": "StatelessWidget",
-        "b": "StatefulWidget",
-        "c": "Both are equally good",
+        "a": "Javascript",
+        "b": "Java",
+        "c": "Rust",
+        "d": "Go"
+      },
+      "isMultiChoice": true,
+      "correctAnswer": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "questionText": "Which one is a strongly typed language?",
+      "answers": {
+        "a": "C",
+        "b": "C++",
+        "c": "C#",
+        "d": "Perl"
+      },
+      "isMultiChoice": false,
+      "correctAnswer": "c"
+    },
+    {
+      "questionText": "Which one is weakly type and also dynamic?",
+      "answers": {
+        "a": "Dart",
+        "b": "JavaScript",
+        "c": "Java",
         "d": "None of the above"
       },
       "isMultiChoice": false,
       "correctAnswer": "a"
-    },
-    {
-      "questionText": "What happens if you change data in a StatelessWidget?",
-      "answers": {
-        "a": "The closest StatefulWidget is updated",
-        "b": "The UI is updated",
-        "c": "The UI is not updated",
-        "d": "Any nested StatefulWidgets are updated"
-      },
-      "isMultiChoice": false,
-      "correctAnswer": "c"
-    },
-    {
-      "questionText": "How should you update data inside of StatefulWidgets?",
-      "answers": {
-        "a": "By calling updateData()",
-        "b": "By calling updateUI()",
-        "c": "By calling updateState()",
-        "d": "By calling setState()"
-      },
-      "isMultiChoice": false,
-      "correctAnswer": "d"
     }
   ]
 }

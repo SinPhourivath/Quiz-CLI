@@ -66,7 +66,7 @@ class Logic {
     do {
       stdout.write(prompt);
       input = stdin.readLineSync();
-      flag = true; // Assume the input is valid initially
+      flag = true;
 
       if (input != null && input.isNotEmpty) {
         inputList = input.split(',').map((answer) => answer.trim()).toList();
@@ -75,14 +75,14 @@ class Logic {
           if (int.tryParse(item) == null) {
             print(
                 "Answers should be in numerically format, separated by commas. Please try again.");
-            flag = false; // Mark as invalid input if a number is found
+            flag = false;
             break;
           }
         }
       } else {
-        flag = false; // If input is null or empty, repeat the loop
+        flag = false;
       }
-    } while (!flag); // Continue until valid input is received
+    } while (!flag);
 
     return input;
   }

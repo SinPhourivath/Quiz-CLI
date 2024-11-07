@@ -66,7 +66,6 @@ class FirestoreDB {
     }
   }
 
-  // New method to save quiz result
   Future<void> saveQuizResult(QuizResult quizResult) async {
     final document = firestore.collection('quizResults');
 
@@ -76,5 +75,16 @@ class FirestoreDB {
     } catch (e) {
       print("Failed to save quiz result: $e");
     }
+  }
+
+  Future<List<QuizResult>> fetchAllStudentQuizResults() async {
+    final document = firestore.collection('quizResults');
+    final results = await document.get();
+
+    List<QuizResult> quizResult = results.map((document) {
+      return QuizResult.fromJson(document.map);
+    }).toList(); 
+
+    return quizResult;
   }
 }

@@ -50,7 +50,11 @@ class QuizManager {
     List<QuestionResult> questionResults = [];
 
     for (var question in quiz.questions) {
+      bool isMultiChoice = !question.isMultiChoice;
+
       print(question.questionText);
+
+      isMultiChoice ? print("Please choose exactly one answer") : print("Please choose multiple answers");
       question.answers.forEach((key, value) {
         print('$key: $value');
       });
@@ -63,27 +67,27 @@ class QuizManager {
           if (question.isMultiChoice) {
             userAnswer = logic.promptForCharList("Enter your answer: ");
             if (!question.validateAnswer(userAnswer!)) {
-              print("Not available");
+              print("Please only choose the available option.");
               userAnswer = "";
             }
           } else {
             userAnswer = logic.promptForChar("Enter your answer: ");
             if (!question.validateAnswer(userAnswer)) {
-              print("Not available");
+              print("Please only choose the available option.");
               userAnswer = "";
             }
           }
         } else {
           if (question.isMultiChoice) {
-            userAnswer = logic.promptForNumList("Enter your answer:: ");
+            userAnswer = logic.promptForNumList("Enter your answer: ");
             if (!question.validateAnswer(userAnswer!)) {
-              print("Not available");
+              print("Please only choose the available option.");
               userAnswer = "";
             }
           } else {
             userAnswer = logic.promptForNum("Enter your answer: ");
             if (!question.validateAnswer(userAnswer)) {
-              print("Not available");
+              print("Please only choose the available option.");
               userAnswer = "";
             }
           }
@@ -101,7 +105,7 @@ class QuizManager {
 
       questionResults.add(QuestionResult(
           questionText: question.questionText,
-          selectedAnswer: userAnswer!,
+          selectedAnswer: userAnswer,
           isCorrect: isCorrect));
     }
 

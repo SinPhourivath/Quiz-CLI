@@ -1,15 +1,16 @@
 class Quiz {
-  final String title;
-  final String description;
-  final List<Question> questions;
+  final String _title;
+  final String _description;
+  final List<Question> _questions;
 
   Quiz({
-    required this.title,
-    required this.description,
-    required this.questions,
-  });
+    required String title,
+    required String description,
+    required List<Question> questions,
+  })  : _title = title,
+        _description = description,
+        _questions = questions;
 
-  // Create an instace from a JSON
   factory Quiz.fromJson(Map<String, dynamic> json) {
     return Quiz(
       title: json['title'] as String,
@@ -20,7 +21,6 @@ class Quiz {
     );
   }
 
-  // Convert instacne back to JSON
   Map<String, dynamic> toJson() {
     return {
       'title': title,
@@ -29,6 +29,10 @@ class Quiz {
     };
   }
 
+  String get title => _title;
+  String get description => _description;
+  List<Question> get questions => _questions;
+
   @override
   String toString() {
     return 'Title: $title\nDescription: $description\n\n$questions';
@@ -36,18 +40,20 @@ class Quiz {
 }
 
 class Question {
-  final String questionText;
-  final Map<String, String> answers;
-  final bool isMultiChoice;
-  final dynamic
-      correctAnswer; // List<String> or String depending on isMultiChoice
+  final String _questionText;
+  final Map<String, String> _answers;
+  final bool _isMultiChoice;
+  final dynamic _correctAnswer;
 
   Question({
-    required this.questionText,
-    required this.answers,
-    required this.isMultiChoice,
-    required this.correctAnswer,
-  });
+    required String questionText,
+    required Map<String, String> answers,
+    required bool isMultiChoice,
+    required dynamic correctAnswer,
+  })  : _questionText = questionText,
+        _answers = answers,
+        _isMultiChoice = isMultiChoice,
+        _correctAnswer = correctAnswer;
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
@@ -69,11 +75,9 @@ class Question {
     };
   }
 
-  bool validateAnswer(
-    String userAnswer,
-  ) {
-    final validOptions = answers.keys.toSet();
-    if (isMultiChoice) {
+  bool validateAnswer(String userAnswer) {
+    final validOptions = _answers.keys.toSet();
+    if (_isMultiChoice) {
       final userAnswers = userAnswer.split(',').map((e) => e.trim()).toSet();
       return userAnswers.isNotEmpty &&
           userAnswers.difference(validOptions).isEmpty;
@@ -82,6 +86,11 @@ class Question {
     }
   }
 
+  String get questionText => _questionText;
+  Map<String, String> get answers => _answers;
+  bool get isMultiChoice => _isMultiChoice;
+  dynamic get correctAnswer => _correctAnswer;
+
   @override
   String toString() {
     return 'Questions: $questionText\nAnswers: $answers\nisMultiChoice: $isMultiChoice\ncorrectAnswer: $correctAnswer\n\n';
@@ -89,15 +98,15 @@ class Question {
 }
 
 class Student {
-  final String firstName;
-  final String lastName;
+  final String _firstName;
+  final String _lastName;
 
   Student({
-    required this.firstName,
-    required this.lastName,
-  });
+    required String firstName,
+    required String lastName,
+  })  : _firstName = firstName,
+        _lastName = lastName;
 
-  // Create an instance from JSON
   factory Student.fromJson(Map<String, dynamic> json) {
     return Student(
       firstName: json['firstName'] as String,
@@ -105,13 +114,15 @@ class Student {
     );
   }
 
-  // Convert instance back to JSON
   Map<String, dynamic> toJson() {
     return {
       'firstName': firstName,
       'lastName': lastName,
     };
   }
+
+  String get firstName => _firstName;
+  String get lastName => _lastName;
 
   @override
   String toString() {
@@ -120,20 +131,22 @@ class Student {
 }
 
 class QuizResult {
-  final String quizName;
-  final String studentName;
-  final int score;
-  final List<QuestionResult> questionResults;
+  final String _quizName;
+  final String _studentName;
+  final int _score;
+  final List<QuestionResult> _questionResults;
 
   QuizResult({
-    required this.quizName,
-    required this.studentName,
-    required this.score,
-    required this.questionResults,
-  });
+    required String quizName,
+    required String studentName,
+    required int score,
+    required List<QuestionResult> questionResults,
+  })  : _quizName = quizName,
+        _studentName = studentName,
+        _score = score,
+        _questionResults = questionResults;
 
-  // Create an instance from JSON
-  factory QuizResult.fromJson(Map<String, dynamic> json) {
+factory QuizResult.fromJson(Map<String, dynamic> json) {
     return QuizResult(
       quizName: json['quizName'] as String,
       studentName: json['studentName'] as String,
@@ -144,7 +157,6 @@ class QuizResult {
     );
   }
 
-  // Convert instance back to JSON
   Map<String, dynamic> toJson() {
     return {
       'quizName': quizName,
@@ -154,24 +166,30 @@ class QuizResult {
     };
   }
 
+  String get quizName => _quizName;
+  String get studentName => _studentName;
+  int get score => _score;
+  List<QuestionResult> get questionResults => _questionResults;
+
   @override
   String toString() {
-    return 'QuizResult for Student $studentName\nQuiz Name: $quizName\n Score: $score\nQuestions: $questionResults';
+    return 'QuizResult for Student $studentName\nQuiz Name: $quizName\nScore: $score\nQuestions: $questionResults';
   }
 }
 
 class QuestionResult {
-  final String questionText;
-  final String selectedAnswer;
-  final bool isCorrect;
+  final String _questionText;
+  final String _selectedAnswer;
+  final bool _isCorrect;
 
   QuestionResult({
-    required this.questionText,
-    required this.selectedAnswer,
-    required this.isCorrect,
-  });
+    required String questionText,
+    required String selectedAnswer,
+    required bool isCorrect,
+  })  : _questionText = questionText,
+        _selectedAnswer = selectedAnswer,
+        _isCorrect = isCorrect;
 
-  // Create an instance from JSON
   factory QuestionResult.fromJson(Map<String, dynamic> json) {
     return QuestionResult(
       questionText: json['questionText'] as String,
@@ -180,7 +198,6 @@ class QuestionResult {
     );
   }
 
-  // Convert instance back to JSON
   Map<String, dynamic> toJson() {
     return {
       'questionText': questionText,
@@ -188,6 +205,10 @@ class QuestionResult {
       'isCorrect': isCorrect,
     };
   }
+
+  String get questionText => _questionText;
+  String get selectedAnswer => _selectedAnswer;
+  bool get isCorrect => _isCorrect;
 
   @override
   String toString() {

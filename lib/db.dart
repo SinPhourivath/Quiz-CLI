@@ -6,9 +6,11 @@ import 'package:quiz_cli/env/env.dart';
 import 'package:quiz_cli/model.dart';
 
 class FirestoreDB {
-  late final Firestore firestore;
+  late final Firestore _firestore;
 
-  FirestoreDB(this.firestore);
+  FirestoreDB(this._firestore);
+
+  Firestore get firestore => _firestore;
 
   factory FirestoreDB.initialize() {
     Firestore.initialize(Env.projectId);
@@ -83,7 +85,7 @@ class FirestoreDB {
 
     List<QuizResult> quizResult = results.map((document) {
       return QuizResult.fromJson(document.map);
-    }).toList(); 
+    }).toList();
 
     return quizResult;
   }

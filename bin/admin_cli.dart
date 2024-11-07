@@ -7,13 +7,14 @@ import 'package:quiz_cli/quiz_manager.dart';
 
 void main() async {
   final db = FirestoreDB.initialize();
-  final quizzes = await db.getAllQuizzes();
 
   final logic = Logic();
 
   print("===Welcome Admin===");
 
   while (true) {
+    final quizzes = await db.getAllQuizzes();
+
     print("1. Display all quizzes");
     print("2. Add a quiz");
     print("3. Delete a quiz");
@@ -39,7 +40,13 @@ void main() async {
         QuizManager quiz = QuizManager(quizzes);
         print("");
         quiz.displayAvailableQuiz();
+        print("Enter 0 to go back");
         String index = logic.promptForNum("Enter your choice: ");
+
+        if (index == "0") {
+          break;
+        }
+
         await db.deleteQuiz(int.parse(index));
         break;
 
